@@ -1,23 +1,24 @@
 /*
 =================================================
-VARIABLES DE COLOR (PALETA NÓRDICA)
+VARIABLES DE COLOR (PALETA BOCETO: NEGRO, GRIS, CIAN, AMARILLO)
 =================================================
 */
 :root {
-    /* Paleta Nórdica Ajustada */
-    --color-fondo: #EFEFEF; /* Gris Claro Sutil */
-    --color-texto: #333333; /* Gris Carbón Cálido (Oscuro) */
+    /* Paleta Inspirada en el Boceto */
+    --color-fondo: #555555; /* ¡NUEVO! Gris Oscuro para fondo principal (simil al boceto) */
+    --color-texto: #111111; /* Negro (para texto en fondo claro, y como color más oscuro para Navbar/Hero cut) */
     
     /* Acentos */
-    --color-acento-principal: #00A878; /* Verde Esmeralda (Primario) */
-    --color-acento-secundario: #E8A38F; /* Terracota / Salmón Suave (Secundario) */
+    --color-acento-principal: #00BCD4; /* Cian/Turquesa Brillante */
+    --color-acento-secundario: #FFC107; /* Amarillo Brillante */
     
     /* SOBRESCRIBIR VARIABLES DE BOOTSTRAP */
     --bs-body-bg: var(--color-fondo);
-    --bs-body-color: var(--color-texto);
-    --bs-primary: var(--color-acento-principal); /* btn-primary es Esmeralda */
-    --bs-secondary: var(--color-acento-secundario); /* Usamos para acentos visuales */
-    --bs-dark: var(--color-texto); /* Navbar y Footer Oscuro es Gris Carbón */
+    /* Establecemos el color del texto del body a blanco para el fondo oscuro */
+    --bs-body-color: white; 
+    --bs-primary: var(--color-acento-principal);
+    --bs-secondary: var(--color-acento-secundario);
+    --bs-dark: var(--color-texto); /* Navbar y Footer Oscuro es Negro */
 }
 
 
@@ -30,7 +31,8 @@ ESTILOS GLOBALES Y TIPOGRAFÍA
 body {
     font-family: 'Inter', sans-serif;
     background-color: var(--color-fondo);
-    color: var(--color-texto);
+    /* Forzamos el color de texto a blanco para el fondo oscuro */
+    color: white; 
     position: relative; 
     z-index: 1;
 }
@@ -46,7 +48,13 @@ a:hover {
     color: var(--color-acento-secundario);
 }
 
-/* Ajuste para los textos de la barra de navegación */
+/* Navbar y Footer: Fondo oscuro, Texto blanco (ya lo maneja el CSS) */
+#mainNav, #contacto {
+    background-color: var(--color-texto) !important; /* Fondo Negro */
+    color: white; 
+}
+
+/* Asegura que los enlaces del navbar sigan siendo blancos */
 .navbar-brand .text-white, 
 .navbar-nav .nav-link {
     color: white !important; 
@@ -63,17 +71,16 @@ IMAGEN CIRCULAR DE PERFIL
     width: 250px; 
     height: 250px; 
     object-fit: cover;
-    border-radius: 50%; /* La clave para la forma circular */
-    border: 5px solid var(--color-acento-secundario); /* Borde Terracota */
+    border-radius: 50%; /* Esto la hace circular */
+    border: 5px solid var(--color-acento-secundario); /* Borde Amarillo */
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); 
     z-index: 10; 
     position: relative;
 }
 
-
 /*
 =================================================
-FONDO GEOMÉTRICO DIAGONAL (El toque visual)
+FONDO GEOMÉTRICO DIAGONAL Y AJUSTE DE CONTRASTE
 =================================================
 */
 
@@ -93,12 +100,12 @@ FONDO GEOMÉTRICO DIAGONAL (El toque visual)
     height: 100%;
     z-index: -1; 
     
-    /* Degradado para crear el corte diagonal (50% Gris Carbón, 50% Fondo Gris Claro) */
+    /* Degradado: Negro (50%) y Gris (50%) */
     background: linear-gradient(
-        150deg, /* Ángulo diagonal que coincide con tu boceto */
-        var(--color-texto) 0%, 
+        150deg, 
+        var(--color-texto) 0%, /* Negro (Oscuro) */
         var(--color-texto) 50%, 
-        var(--color-fondo) 50%, 
+        var(--color-fondo) 50%, /* Gris Oscuro */
         var(--color-fondo) 100% 
     );
 }
@@ -109,19 +116,25 @@ FONDO GEOMÉTRICO DIAGONAL (El toque visual)
     z-index: 5;
 }
 
+/* FORZAR TEXTO BLANCO en la sección principal para el área oscura del fondo */
+#inicio p.lead {
+    color: white !important; 
+}
+#inicio .display-5 {
+    color: var(--color-acento-principal) !important; /* Mantenemos el Cian en el título */
+}
+
 
 /*
 =================================================
-ESTILOS DE COMPONENTES
+AJUSTE DE TEXTO EN CONTENEDORES CLAROS (CARDS)
 =================================================
 */
 
-#mainNav {
-    background-color: var(--color-texto) !important; /* Navbar oscuro (Gris Carbón) */
-}
-
 .card {
     border-radius: 8px;
+    /* Forzamos el fondo de la tarjeta a blanco */
+    background-color: white !important;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05); 
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
@@ -131,14 +144,19 @@ ESTILOS DE COMPONENTES
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
 }
 
-/* Cursor e interaccion para el efecto JQuery */
-.card-header {
-    background-color: #FDFDFD;
-    border-bottom: 1px solid var(--color-fondo);
-    cursor: pointer;
+/* Forzamos todo el texto dentro de los elementos claros (cards, headers) a Negro */
+.card-body, .card-header, #proyectos h2 {
+    color: var(--color-texto) !important; 
 }
 
-#contacto {
-    background-color: var(--color-texto) !important; 
-    color: white;
+/* Aseguramos que los párrafos secundarios dentro de cards sean negros */
+.card-body p, .card-body h4 {
+    color: var(--color-texto) !important;
+}
+
+/* Cursor e interaccion para el efecto JQuery */
+.card-header {
+    background-color: white; 
+    border-bottom: 1px solid var(--color-fondo);
+    cursor: pointer;
 }

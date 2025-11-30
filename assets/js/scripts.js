@@ -17,9 +17,7 @@ $(document).ready(function () {
         // 1. Alterna el efecto de slide (muestra/oculta) en el párrafo con la clase 'descripcion-detallada'
         $(this).closest('.card').find('.descripcion-detallada').slideToggle(300);
         
-        // 2. Opcional: Cambia la clase de color del borde al hacer clic (Terracota <-> Esmeralda)
-        // La clase 'border-primary' se alterna con 'border-acento-secundario' (que debes definir en CSS si quieres un efecto visual)
-        // Para este ejemplo, solo alternamos con una clase temporal:
+        // 2. Opcional: Cambia la clase de color del borde al hacer clic
         $(this).closest('.card').toggleClass('border-secondary-color');
     });
 
